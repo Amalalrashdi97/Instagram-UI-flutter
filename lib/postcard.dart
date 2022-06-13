@@ -13,10 +13,9 @@ class PostCard extends StatelessWidget {
   File image;
   var imgUrl;
   var docId;
-  bool like=false;
+  bool like = false;
 
-  PostCard({this.Caption,this.like,
-    this.index, this.docId, this.imgUrl});
+  PostCard({this.Caption, this.like, this.index, this.docId, this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,6 @@ class PostCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-
           child: Row(
             children: [
               SizedBox(width: 10),
@@ -36,8 +34,7 @@ class PostCard extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(width: 2, color: Color(0xffff4657)),
                     image: DecorationImage(
-                        image: AssetImage("img/aftar.jpg"),
-                        fit: BoxFit.cover)),
+                        image: AssetImage("img/aftar.jpg"), fit: BoxFit.cover)),
               ),
               SizedBox(width: 10),
               Text(
@@ -50,22 +47,34 @@ class PostCard extends StatelessWidget {
               Icon(FontAwesome.ellipsis_v, size: 18),
             ],
           ),
-
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Container(height: 1,width: double.infinity,color: Colors.grey.shade200,),
+          child: Container(
+            height: 1,
+            width: double.infinity,
+            color: Colors.grey.shade200,
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 10),
           child: Container(
-            child:Container(child: imgUrl ==null?Icon(Icons.image,size: 50,):Image.network(imgUrl),
-            width: double.infinity,
-            height: 200,
+            child: Container(
+              child: imgUrl == null
+                  ? Icon(
+                      Icons.image,
+                      size: 50,
+                    )
+                  : Image.network(
+                      imgUrl,
+                      fit: BoxFit.fill,
+                    ),
+              width: double.infinity,
+              height: 460,
+            ),
           ),
-        ),),
+        ),
         SizedBox(height: 10),
-
 
         ///below the post ----> buttons and comments
         Padding(
@@ -75,17 +84,28 @@ class PostCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.favorite,color: Colors.red,size: 25,),
+                  Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                    size: 25,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Icon(
-                      Icons.mode_comment_outlined,size: 25,
+                      Icons.mode_comment_outlined,
+                      size: 25,
                     ),
                   ),
-                  Icon(Icons.share,size: 25,)
+                  Icon(
+                    Icons.share,
+                    size: 25,
+                  )
                 ],
               ),
-              Icon(Icons.bookmark,size: 25,)
+              Icon(
+                Icons.bookmark,
+                size: 25,
+              )
             ],
           ),
         ),
@@ -122,17 +142,16 @@ class PostCard extends StatelessWidget {
                     TextSpan(
                         text: "ama_codes",
                         style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextSpan(
-                        text:
-                        Caption),
+                    TextSpan(text: Caption),
                   ],
                 ),
               ),
-
             ),
           ],
         ),
-        SizedBox(height: 10,)
+        SizedBox(
+          height: 10,
+        )
       ],
     );
   }

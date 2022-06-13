@@ -58,42 +58,48 @@ class _AddpostState extends State<Addpost> {
             Padding(
               padding: const EdgeInsets.all(60.0),
             ),
-            GestureDetector(
-                // alignment: Alignment.center,
+            Row(
+              children: [
+                GestureDetector(
+                    // alignment: Alignment.center,
 
-                child: Container(
-                  height: 140,
-                  width: 180,
-                  color: Colors.grey,
-                  child: image == null
-                      ? Icon(
-                          Icons.image,
-                          size: 50,
-                        )
-                      : Image.file(
-                          image,
-                          fit: BoxFit.fill,
-                        ),
+                    child: Container(
+                      height: 140,
+                      width: 180,
+                      color: Colors.grey,
+                      child: image == null
+                          ? Icon(
+                              Icons.image,
+                              size: 50,
+                            )
+                          : Image.file(
+                              image,
+                              fit: BoxFit.fill,
+                            ),
+                    ),
+                    onTap: () async {
+                      _storage.getImage(context).then((file) {
+                        setState(() {
+                          image = File(file.path);
+                          print(file.path);
+                        });
+                      });
+                    }),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
                 ),
-                onTap: () async {
-                  _storage.getImage(context).then((file) {
-                    setState(() {
-                      image = File(file.path);
-                      print(file.path);
-                    });
-                  });
-                }),
-            Container(
-                width: 300,
-                height: 45,
-                child: TextField(
-                    controller: Caption,
-                    decoration: InputDecoration(
-                      hintText: ' Your Caption...',
-                    ))),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+                Container(
+                    width: 300,
+                    height: 45,
+                    child: TextField(
+                        controller: Caption,
+                        decoration: InputDecoration(
+                          hintText: ' Your Caption...',
+                        ))),
+
+              ],
             ),
+
             Padding(
               padding: const EdgeInsets.all(10.0),
             ),
