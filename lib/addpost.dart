@@ -28,7 +28,7 @@ class _AddpostState extends State<Addpost> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBar(size),
-      body: Body(size),
+      body: Body(),
     );
   }
 
@@ -36,81 +36,34 @@ class _AddpostState extends State<Addpost> {
     return PreferredSize(
       preferredSize: Size.fromHeight(55),
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10, top: 10),
-          child: SizedBox(
-            width: 10,
-            child: Text(
-              ("Add Post "),
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget Body(size) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(60.0),
-            ),
             Row(
               children: [
-                GestureDetector(
-                    // alignment: Alignment.center,
-
-                    child: Container(
-                      height: 140,
-                      width: 180,
-                      color: Colors.grey,
-                      child: image == null
-                          ? Icon(
-                              Icons.image,
-                              size: 50,
-                            )
-                          : Image.file(
-                              image,
-                              fit: BoxFit.fill,
-                            ),
+                IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_outlined,
+                      color: Colors.black,
+                      size: 28,
                     ),
-                    onTap: () async {
-                      _storage.getImage(context).then((file) {
-                        setState(() {
-                          image = File(file.path);
-                          print(file.path);
-                        });
-                      });
+                    onPressed: () {
+                      Navigator.pop(context);
                     }),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    ("New Post "),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Container(
-                    width: 300,
-                    height: 45,
-                    child: TextField(
-                        controller: Caption,
-                        decoration: InputDecoration(
-                          hintText: ' Your Caption...',
-                        ))),
-
               ],
             ),
-
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-            ),
-            TextButton(
-                child: Text(
-                  'ADD',
-                  style: TextStyle(
-                      color: Colors.black54,
-                      letterSpacing: .5,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400),
+            IconButton(
+                icon: Icon(
+                  Icons.check,
+                  color: Colors.blue,
+                  size: 30,
                 ),
                 onPressed: () async {
                   if (image != null) {
@@ -132,6 +85,224 @@ class _AddpostState extends State<Addpost> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget Body() {
+    return SingleChildScrollView(
+      child:  Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+            ),
+            Row(
+              children: [
+                /// add caption
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                      width: 260,
+                      height: 45,
+                      child: TextField(
+                          controller: Caption,
+                          decoration: InputDecoration(
+                            hintStyle:
+                                TextStyle(fontSize: 16.0, color: Colors.grey),
+                            hintText: 'Write a caption...',
+                          ))),
+                ),
+                ///add picture
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: GestureDetector(
+                      // alignment: Alignment.center,
+
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        color: Colors.grey,
+                        child: image == null
+                            ? Icon(
+                                Icons.image,
+                                size: 30,
+                                color: Colors.white,
+                              )
+                            : Image.file(
+                                image,
+                                fit: BoxFit.fill,
+                              ),
+                      ),
+                      onTap: () async {
+                        _storage.getImage(context).then((file) {
+                          setState(() {
+                            image = File(file.path);
+                            print(file.path);
+                          });
+                        });
+                      }),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+                width: double.infinity,
+                height: 45,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      //                    <--- top side
+                      color: Colors.grey.shade200,
+                      width: .5,
+                    ),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Tag people",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  )),
+                )),
+            Container(
+                width: double.infinity,
+                height: 45,
+                decoration: BoxDecoration(
+                  border: Border(
+                    ///  top side
+                    top: BorderSide(
+                      color: Colors.grey.shade200,
+                      width: .5,
+                    ),
+                    /// top side
+                    bottom: BorderSide(
+                      color: Colors.grey.shade200,
+                      width: .5,
+                    ),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Add location",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  )),
+                )),
+            Padding(padding: EdgeInsets.only(top: 12)),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Also post to",
+                    style: TextStyle(fontSize: 16),
+                  )),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Facebook",
+                        style: TextStyle(fontSize: 16),
+                      )),
+                ),
+                IconButton(
+                    icon: Icon(
+                      Icons.toggle_off_outlined,
+                      color: Colors.grey,
+                      size: 35,
+                    ),
+                    onPressed: () {}
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Twitter",
+                        style: TextStyle(fontSize: 16),
+                      )),
+                ),
+                IconButton(
+                    icon: Icon(
+                      Icons.toggle_off_outlined,
+                      color: Colors.grey,
+                      size: 35,
+                    ),
+                    ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Tumblr",
+                        style: TextStyle(fontSize: 16),
+                      )),
+                ),
+                IconButton(
+                    icon: Icon(
+
+                      Icons.toggle_off_outlined,
+                      color: Colors.grey,
+                      size: 35,
+                    ),
+                    onPressed: () {
+                    }),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Advanced settings",
+                        style: TextStyle(fontSize: 16),
+                      )),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.arrow_forward_ios_sharp,
+                    color: Colors.black,
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
+
+          ],
+        ),
+
     );
   }
 }

@@ -67,10 +67,10 @@ class PostCard extends StatelessWidget {
                     )
                   : Image.network(
                       imgUrl,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
               width: double.infinity,
-              height: 460,
+              height: 500,
             ),
           ),
         ),

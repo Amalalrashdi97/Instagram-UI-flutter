@@ -28,8 +28,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Stack(
+    return  Stack(
       children: [
+
         Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -89,7 +90,7 @@ class _HomeState extends State<Home> {
 
       ///Posts
       SizedBox(
-        height: 510,
+        height: 532,
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('Post').snapshots(),
           builder: (context, snapshot) {
