@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
 
       ///Posts
       SizedBox(
-        height: 532,
+        height: 500,
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('Post').snapshots(),
           builder: (context, snapshot) {

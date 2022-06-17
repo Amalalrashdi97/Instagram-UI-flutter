@@ -70,7 +70,7 @@ class PostCard extends StatelessWidget {
                       fit: BoxFit.contain,
                     ),
               width: double.infinity,
-              height: 500,
+              height: 460,
             ),
           ),
         ),

@@ -71,7 +71,8 @@ class _ProfileState extends State<Profile> {
                       color: Colors.grey[400],
                       //border: Border.all(width: 2, color: Colors.pinkAccent),
                       shape: BoxShape.circle,
-                    )),
+                    )
+                ),
 
                 ///numbers of post,follower,following
 
